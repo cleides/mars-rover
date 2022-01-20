@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+MarsRover --> CompassPoint
+MarsRover --> Plateau
+
+class MarsRover {
+-roverPositionX: Integer
+-roverPositionY: Integer
+-facingPosition: CompassPoint
+-plateau: Plateau
+
++MarsRover(plateau: Plateau, startPositionX: Integer, startPositionY: Integer, startFacingPosition: CompassPoint)
++turnLeft(): void
++turnRight(): void
++movesForward(): void
++getRoverPositionX(): Integer
++getRoverPositionY(): Integer
++geFacingPosition(): CompassPoint
++getRoverPositionAndOrientation(): String
+}
+class Plateau {
+-plateauMaxSizeX: Integer
+-plateauMaxSizeY: Integer
+
++isPlateauPositionSafeToMoveTo(positionX: Integer, positonY: Integer): boolean
+}
+
+enum CompassPoint{
+N,
+S,
+E,
+W
+}
+
+@enduml
