@@ -3,7 +3,13 @@
 skinparam classAttributeIconSize 0
 
 MarsRover --> CompassPoint
-MarsRover --> Plateau
+MarsRover *-- Plateau
+MissionControl *-- MarsRover
+RectangularPlateau ..|> Plateau
+class MissionControl {
++rover1: MarsRover
++rover2: MarsRover
+}
 
 class MarsRover {
 -roverPositionX: Integer
@@ -11,20 +17,28 @@ class MarsRover {
 -facingPosition: CompassPoint
 -plateau: Plateau
 
-+MarsRover(plateau: Plateau, startPositionX: Integer, startPositionY: Integer, startFacingPosition: CompassPoint)
-+turnLeft(): void
-+turnRight(): void
-+movesForward(): void
++MarsRover(plateau:
+Plateau, startPositionX: Integer, startPositionY: Integer, startFacingPosition: CompassPoint)
+-turnLeft(): void
+-turnRight(): void
+-movesForward(): void
++move(commands: String): void
 +getRoverPositionX(): Integer
 +getRoverPositionY(): Integer
 +geFacingPosition(): CompassPoint
 +getRoverPositionAndOrientation(): String
 }
-class Plateau {
+
+Interface Plateau {
++isPlateauPositionSafeToMoveTo(positionX: Integer, positionY: Integer): boolean
+}
+
+class RectangularPlateau {
 -plateauMaxSizeX: Integer
 -plateauMaxSizeY: Integer
-
-+isPlateauPositionSafeToMoveTo(positionX: Integer, positonY: Integer): boolean
+'creating a constructor here to
++Plateau(plateauMaxSizeX: Integer, plateauMaxSizeY: Integer)
++isPlateauPositionSafeToMoveTo(positionX: Integer, positionY: Integer): boolean
 }
 
 enum CompassPoint{
