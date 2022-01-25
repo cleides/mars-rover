@@ -2,13 +2,17 @@
 'https://plantuml.com/class-diagram
 skinparam classAttributeIconSize 0
 
+left to right direction
+
 MarsRover --> CompassPoint
 MarsRover *-- Plateau
 MissionControl *-- MarsRover
 RectangularPlateau ..|> Plateau
+CircularPlateau ..|> Plateau
+
 class MissionControl {
-+rover1: MarsRover
-+rover2: MarsRover
++rovers: List<MarsRover>
+
 }
 
 class MarsRover {
@@ -16,30 +20,41 @@ class MarsRover {
 -roverPositionY: Integer
 -facingPosition: CompassPoint
 -plateau: Plateau
+-moveInstructionsLeftToDo: String
 
 +MarsRover(plateau:
 Plateau, startPositionX: Integer, startPositionY: Integer, startFacingPosition: CompassPoint)
 -turnLeft(): void
 -turnRight(): void
 -movesForward(): void
-+move(commands: String): void
++move(): void
 +getRoverPositionX(): Integer
 +getRoverPositionY(): Integer
-+geFacingPosition(): CompassPoint
++getFacingPosition(): CompassPoint
 +getRoverPositionAndOrientation(): String
++setMoveInstructions(moveInstructions: String):void
 }
 
 Interface Plateau {
 +isPlateauPositionSafeToMoveTo(positionX: Integer, positionY: Integer): boolean
++registerRovers(rovers: List<MarsRover>): void
 }
 
 class RectangularPlateau {
 -plateauMaxSizeX: Integer
 -plateauMaxSizeY: Integer
+-rovers: List<MarsRover>
 'creating a constructor here to
-+Plateau(plateauMaxSizeX: Integer, plateauMaxSizeY: Integer)
-+isPlateauPositionSafeToMoveTo(positionX: Integer, positionY: Integer): boolean
++RectangularPlateau(plateauMaxSizeX: Integer, plateauMaxSizeY: Integer)
 }
+
+class CircularPlateau {
+-plateauMaxRadius: Integer
+-rovers: List<MarsRover>
+'creating a constructor here to
++RectangularPlateau(plateauMaxRadius: Integer)
+}
+
 
 enum CompassPoint{
 N,
