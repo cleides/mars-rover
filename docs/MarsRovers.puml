@@ -52,7 +52,7 @@ class CircularPlateau {
 -plateauMaxRadius: Integer
 -rovers: List<MarsRover>
 'creating a constructor here to
-+RectangularPlateau(plateauMaxRadius: Integer)
++CircularPlateau(plateauMaxRadius: Integer)
 }
 
 
