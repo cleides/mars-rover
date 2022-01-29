@@ -14,10 +14,12 @@ public class RectangularPlateau {
     }
 
     public int getPlateauMaxSizeX() {
+
         return plateauMaxSizeX;
     }
 
     public int getPlateauMaxSizeY() {
+
         return plateauMaxSizeY;
     }
 
