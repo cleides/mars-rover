@@ -42,6 +42,7 @@ public class MarsRover {
     }
 
     public String getRoverPositionAndOrientation() {
+        // TODO
         return "to do";
     }
 
