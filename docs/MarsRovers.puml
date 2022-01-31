@@ -27,7 +27,7 @@ Plateau, startPositionX: Integer, startPositionY: Integer, startFacingPosition: 
 -turnLeft(): void
 -turnRight(): void
 -movesForward(): void
-+move(): void
++executeNextMoveInstruction(): void
 +getRoverPositionX(): Integer
 +getRoverPositionY(): Integer
 +getFacingPosition(): CompassPoint
