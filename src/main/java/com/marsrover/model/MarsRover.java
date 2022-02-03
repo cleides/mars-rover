@@ -5,7 +5,7 @@ public class MarsRover {
     private int roverPositionX;
     private int roverPositionY;
     private CompassPoint facingPosition;
-    private Plateau plateau;
+    private final Plateau plateau; // fixed, rover cannot change Plateau
     private String moveInstructionsLeftToDo;
 
     public MarsRover(Plateau plateau, int startPositionX, int startPositionY,
@@ -19,29 +19,23 @@ public class MarsRover {
     private void turnLeft() {
         if (facingPosition == CompassPoint.N) {
             facingPosition = CompassPoint.W;
-        }
-        if (facingPosition == CompassPoint.E) {
-            facingPosition = CompassPoint.N;
-        }
-        if (facingPosition == CompassPoint.S) {
-            facingPosition = CompassPoint.E;
-        }
-        if (facingPosition == CompassPoint.W) {
+        } else if (facingPosition == CompassPoint.W) {
             facingPosition = CompassPoint.S;
+        } else if (facingPosition == CompassPoint.S) {
+            facingPosition = CompassPoint.E;
+        } else if (facingPosition == CompassPoint.E) {
+            facingPosition = CompassPoint.N;
         }
     }
 
     private void turnRight() {
         if (facingPosition == CompassPoint.N) {
             facingPosition = CompassPoint.E;
-        }
-        if (facingPosition == CompassPoint.E) {
+        } else if (facingPosition == CompassPoint.E) {
             facingPosition = CompassPoint.S;
-        }
-        if (facingPosition == CompassPoint.S) {
+        } else if (facingPosition == CompassPoint.S) {
             facingPosition = CompassPoint.W;
-        }
-        if (facingPosition == CompassPoint.W) {
+        } else if (facingPosition == CompassPoint.W) {
             facingPosition = CompassPoint.N;
         }
     }
@@ -53,16 +47,13 @@ public class MarsRover {
         if (facingPosition == CompassPoint.N) {
             desiredX = roverPositionX;
             desiredY = roverPositionY + 1;
-        }
-        if (facingPosition == CompassPoint.E) {
+        } else if (facingPosition == CompassPoint.E) {
             desiredX = roverPositionX + 1;
             desiredY = roverPositionY;
-        }
-        if (facingPosition == CompassPoint.S) {
+        } else if (facingPosition == CompassPoint.S) {
             desiredX = roverPositionX;
             desiredY = roverPositionY - 1;
-        }
-        if (facingPosition == CompassPoint.W) {
+        } else if (facingPosition == CompassPoint.W) {
             desiredX = roverPositionX - 1;
             desiredY = roverPositionY;
         }
@@ -79,16 +70,17 @@ public class MarsRover {
     }
 
     public void executeNextMoveInstruction() {
-        String nextMoveInstruction = moveInstructionsLeftToDo;
+        //pulling out first letter of remaining instructions
+        String nextMoveInstruction = moveInstructionsLeftToDo.substring(0, 1);
         if (nextMoveInstruction.equals("L")) { // for String .equals usually is ==
             turnLeft();
-        }
-        if (nextMoveInstruction.equals("R")) {
+        } else if (nextMoveInstruction.equals("R")) {
             turnRight();
-        }
-        if (nextMoveInstruction.equals("M")) {
+        } else if (nextMoveInstruction.equals("M")) {
             movesForward();
         }
+        // Once instruction is executed we can remove it.
+        moveInstructionsLeftToDo = moveInstructionsLeftToDo.substring(1);
     }
 
     public int getRoverPositionX() {
@@ -104,8 +96,7 @@ public class MarsRover {
     }
 
     public String getRoverPositionAndOrientation() {
-        // TODO
-        return "to do";
+        return roverPositionX + " " + roverPositionY + " " + facingPosition;
     }
 
     public void setMoveInstructions(String moveInstructions) {
