@@ -24,14 +24,16 @@ the rover. The parameterized tests were developed later.
 ## Class Diagram
 The UML diagram below shows the classes mentioned above plus a `CompassPoint` enum class containing
 the vehicles facing position. There is a `Plateau` interface that every plateau shape class must implement.
+This allows for different shapes of plateau to be added. For example the diagram shows how a circular plateau
+would fit into the design.
 
 ![](https://github.com/cleides/mars-rover/blob/master/docs/MarsRoversUMLDiagram.png?raw=true)
 
-##Assumptions
+## Assumptions
 
  - A rover cannot move off the `Plateau`.
- - If a rover is asked to move off the `Plateau`, it does not move and move instruction is regarded as 
-consumed/used.
+ - If a rover is asked to move off the `Plateau`, it stays put. In this case the move instruction is 
+ still regarded as consumed/used.
 
 ## Testing
 
@@ -49,7 +51,7 @@ There are also non-parameterized tests in `RectangularPlateauSizeTest` and `Mars
 
 The `MissionControl` class will be implemented to manage multiple rovers and other vehicles once
 they are added to the list. It will also coordinate the movements so that each vehicle moves one 
-at the time.
+at a time.
 
 The `RectangularPlateau` class does not yet implement checks for collision between Rovers although
 the design for it is done. The idea is that `MissionControl` class will call the
